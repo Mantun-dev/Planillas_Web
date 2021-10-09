@@ -1,0 +1,818 @@
+<!-- Modal -->
+<div class="modal fade" id="addEmployeed" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="exampleModalCenterTitle">Nuevo empleado
+                </h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left: 600px;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm">
+                        <label for="recipient-name" class="col-form-label">Identidad:</label>
+                        <input type="text" class="form-control" id="dniEmployee"
+                            onkeypress="return validateNumber(event)">
+                    </div>
+                    <div class="form-group col-sm">
+                        <label for="recipient-name" class="col-form-label">Número de empleado:</label>
+                        <input type="text" class="form-control" id="numberEmployee">
+                    </div>
+                    <div class="form-group col-sm">
+                        <label for="recipient-name" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="nameEmployee" required>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm">
+                        <label for="recipient-name" class="col-form-label">Fecha
+                            de nacimiento:</label>
+                        <input type="date" class="form-control" id="dateEmployee" required>
+                    </div>
+                    <div class="form-group col-sm">
+                        <label for="message-text" class="col-form-label">Teléfono:</label>
+                        <input type="text" class="form-control" id="phoneEmployee"
+                            onkeypress="return validateNumber(event)">
+                    </div>
+                    <div class="form-group col-sm">
+                        <label for="message-text" class="col-form-label">Fecha
+                            de ingreso:</label>
+                        <input type="date" class="form-control" id="dateIn">
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm">
+                        <label for="message-text" class="col-form-label">No de
+                            cuenta BAC:</label>
+
+                        <input type="text" class="form-control" id="account" onkeypress="return validateNumber(event)">
+                    </div>
+                    <div class="form-group col-sm">
+                        <label for="message-text" class="col-form-label">Salario
+                            mensual:</label>
+                        <input type="text" class="form-control" id="salary" onkeypress="return validateNumber(event)">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm">
+                        <label for="message-text" class="col-form-label form-group">Entidad:</label>
+                        <select id="entity" style="width:150px;" placeholder="Buscar..." required>
+                            <option value="">Seleccione...</option>
+                            {{#if entities}}
+                            {{#each entities}}
+                            <option value="{{entityId}}">{{entityName}}</option>
+                            {{/each}}
+                            {{else}}
+
+                            <thead>
+                                <tr class="text-center">
+                                    <th>No hay registros</th>
+                                </tr>
+                            </thead>
+                            {{/if}}
+                        </select>
+                    </div>
+
+                    <div class="form-group col-sm">
+                        <label for="message-text" class="col-form-label form-group">Ciudad:</label>
+                        <select id="town" style="width:150px;" placeholder="Buscar..." required>
+                            <option value="">Seleccione...</option>
+                            {{#if towns}}
+                            {{#each towns}}
+                            <option value="{{townId}}">{{townName}}</option>
+                            {{/each}}
+                            {{else}}
+
+                            <thead>
+                                <tr class="text-center">
+                                    <th>No hay registros</th>
+                                </tr>
+                            </thead>
+                            {{/if}}
+                        </select>
+                    </div>
+
+                    <div class="form-group col-sm">
+                        <label for="message-text" class="col-form-label form-group">Area:</label>
+                        <select id="area" style="width:150px;" placeholder="Buscar..." required>
+                            <option value="">Seleccione...</option>
+                            {{#if area}}
+                            {{#each area}}
+                            <option value="{{areaId}}">{{areaDescription}}</option>
+                            {{/each}}
+                            {{else}}
+
+                            <thead>
+                                <tr class="text-center">
+                                    <th>No hay registros</th>
+                                </tr>
+                            </thead>
+                            {{/if}}
+                        </select>
+                    </div>
+
+                    <div class="form-group col-sm">
+                        <label for="message-text" class="col-form-label form-group">Tipo planilla:</label>
+                        <select id="payrrolls" style="width:150px;" placeholder="Buscar..." required>
+                            <option value="">Seleccione...</option>
+                            {{#if payrrolls}}
+                            {{#each payrrolls}}
+                            <option value="{{typeId}}">{{typeDescription}}</option>
+                            {{/each}}
+                            {{else}}
+
+                            <thead>
+                                <tr class="text-center">
+                                    <th>No hay registros</th>
+                                </tr>
+                            </thead>
+                            {{/if}}
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary" onclick="addEmployeed()">Guardar</button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editEmployee" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Ediciones
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left: 600px;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm">
+                        <label for="recipient-name" class="col-form-label">Identidad:</label>
+                        <input type="text" class="form-control" id="dniEditEmployee">
+                    </div>
+                    <div class="form-group col-sm">
+                        <label for="recipient-name" class="col-form-label">Número de empleado:</label>
+                        <input type="text" class="form-control" id="editNumberEmployee">
+                    </div>
+                    <div class="form-group col-sm">
+                        <label for="recipient-name" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="editNameEmployee">
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm">
+                        <label for="recipient-name" class="col-form-label">Fecha
+                            de nacimiento:</label>
+                        <input type="text" class="form-control" id="editDateEmployee">
+                    </div>
+                    <div class="form-group col-sm">
+                        <label for="message-text" class="col-form-label">Teléfono:</label>
+                        <label class="form-control" id="editPhoneEmployee"></label>
+                    </div>
+                    <div class="form-group col-sm">
+                        <label for="message-text" class="col-form-label">Fecha
+                            de ingreso:</label>
+                        <label class="form-control" id="editDateInEmployee"></label>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm">
+                        <label for="message-text" class="col-form-label">No de
+                            cuenta BAC:</label>
+                        <label class="form-control" id="editAccountEmployee"></label>
+                    </div>
+                    <div class="form-group col-sm">
+                        <label for="message-text" class="col-form-label">Salario
+                            mensual:</label>
+                        <label class="form-control" id="editSalaryEmployee"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addEmployeeConstractor" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Ediciones
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left: 600px;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm">
+                        <label for="recipient-name" class="col-form-label">Identidad:</label>
+                        <input type="text" class="form-control" id="dniContractor">
+                    </div>
+                    <div class="form-group col-sm">
+                        <label for="recipient-name" class="col-form-label">Número de empleado:</label>
+                        <input type="text" class="form-control" id="numberContractor">
+                    </div>
+                    <div class="form-group col-sm">
+                        <label for="recipient-name" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="nameContractor">
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm">
+                        <label for="recipient-name" class="col-form-label">Fecha
+                            de nacimiento:</label>
+                        <input type="text" class="form-control" id="dateContractor">
+                    </div>
+                    <div class="form-group col-sm">
+                        <label for="message-text" class="col-form-label">Teléfono:</label>
+                        <label class="form-control" id="phoneContractor"></label>
+                    </div>
+                    <div class="form-group col-sm">
+                        <label for="message-text" class="col-form-label">Fecha
+                            de ingreso:</label>
+                        <label class="form-control" id="dateInContractor"></label>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm">
+                        <label for="message-text" class="col-form-label">No de
+                            cuenta BAC:</label>
+                        <label class="form-control" id="accountContractor"></label>
+                    </div>
+                    <div class="form-group col-sm">
+                        <label for="message-text" class="col-form-label">Salario
+                            mensual:</label>
+                        <label class="form-control" id="salaryContractor"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save
+                    changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="getDeductionsContratista" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a type="button" class="btn btn-info" data-toggle="modal" data-target="#" onclick="createNewElement();">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                        class="bi bi-person-plus-fill" viewBox="0 0 18 18">
+                        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                        <path fill-rule="evenodd"
+                            d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                    </svg>
+                    <span style="margin-left: 1vh;">
+                        Agregar</span>
+                </a>
+                <div id="" style="margin-left: 5vh;"></div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left: 600px;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <table id="examples1" class="display" style="width:100%">
+                        {{#if deductions}}
+                        <thead>
+                            <tr>
+                                <th style="width: 10vh;">No.</th>
+                                <th style="width: 20vh;">Compañia</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each deductions}}
+                            <tr>
+                                <td>{{deductionId}}</td>
+                                <td>{{deductionDescription}}</td>
+                                <td>
+                                    <button type="button" id="editBtn" class="btn" data-toggle="modal"
+                                        data-target="#editPrice" style="margin-left: 1vh;" onclick="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                            <path
+                                                d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                        {{else}}
+                        <thead>
+                            <tr class="text-center">
+                                <th>No hay Empleados</th>
+                            </tr>
+                        </thead>
+                        {{/if}}
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="getArea" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a type="button" class="btn btn-info" data-toggle="modal" data-target="#" onclick="createNewElement();">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                        class="bi bi-person-plus-fill" viewBox="0 0 18 18">
+                        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                        <path fill-rule="evenodd"
+                            d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                    </svg>
+                    <span style="margin-left: 1vh;">
+                        Agregar</span>
+                </a>
+                <div id="newElementId" style="margin-left: 5vh;"></div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left: 600px;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <table id="examples1" class="display" style="width:100%; margin-left: 4vh;">
+                        {{#if area}}
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Área</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each area}}
+                            <tr>
+                                <td>{{areaId}}</td>
+                                <td>{{areaDescription}}</td>
+                                <td>
+                                    <div class="dropdown">
+
+                                        <button class="btn " type="button" id="dropdownMenuButton"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                fill="currentColor" class="bi bi-three-dots-vertical"
+                                                viewBox="0 0 15 15">
+                                                <path
+                                                    d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                            </svg>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                            <a type="button" class="btn" data-toggle="modal" data-target="#">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                    <path fill-rule="evenodd"
+                                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                </svg>
+                                                <span style="margin-left: 1vh;">
+                                                    Editar</span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- <span class="badge bg-success">Active</span> -->
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                        {{else}}
+                        <thead>
+                            <tr class="text-center">
+                                <th>No hay Empleados</th>
+                            </tr>
+                        </thead>
+                        {{/if}}
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="sendArea()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="getBono" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a type="button" class="btn btn-info" data-toggle="modal" data-target="#" onclick="createNewElement();">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                        class="bi bi-person-plus-fill" viewBox="0 0 18 18">
+                        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                        <path fill-rule="evenodd"
+                            d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                    </svg>
+                    <span style="margin-left: 1vh;">
+                        Agregar</span>
+                </a>
+                <div id="" style="margin-left: 5vh;"></div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left: 600px;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <table id="examples1" class="display" style="width:100%; margin-left: 4vh;">
+                        {{#if bonos}}
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Descripción</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each bonos}}
+                            <tr>
+                                <td>{{number}}</td>
+                                <td>{{incomeDescription}}</td>
+                                <td>
+                                    <div class="dropdown">
+
+                                        <button class="btn " type="button" id="dropdownMenuButton"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                fill="currentColor" class="bi bi-three-dots-vertical"
+                                                viewBox="0 0 15 15">
+                                                <path
+                                                    d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                            </svg>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                            <a type="button" class="btn" data-toggle="modal" data-target="#">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                    <path fill-rule="evenodd"
+                                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                </svg>
+                                                <span style="margin-left: 1vh;">
+                                                    Editar</span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- <span class="badge bg-success">Active</span> -->
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                        {{else}}
+                        <thead>
+                            <tr class="text-center">
+                                <th>No hay Empleados</th>
+                            </tr>
+                        </thead>
+                        {{/if}}
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="getDeductions" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a type="button" class="btn btn-info" data-toggle="modal" data-target="#" onclick="">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                        class="bi bi-person-plus-fill" viewBox="0 0 18 18">
+                        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                        <path fill-rule="evenodd"
+                            d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                    </svg>
+                    <span style="margin-left: 1vh;">
+                        Agregar</span>
+                </a>
+                <div id="" style="margin-left: 5vh;"></div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left: 600px;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <table id="examples1" class="display" style="width:100%;margin-left: 4vh;">
+                        {{#if deductions}}
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Descripción</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each deductions}}
+                            <tr>
+                                <td>{{deductionId}}</td>
+                                <td>{{deductionDescription}}</td>
+                                <td>
+                                    <div class="dropdown">
+
+                                        <button class="btn " type="button" id="dropdownMenuButton"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                fill="currentColor" class="bi bi-three-dots-vertical"
+                                                viewBox="0 0 15 15">
+                                                <path
+                                                    d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                            </svg>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                            <a type="button" class="btn" data-toggle="modal" data-target="#">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                    <path fill-rule="evenodd"
+                                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                </svg>
+                                                <span style="margin-left: 1vh;">
+                                                    Editar</span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- <span class="badge bg-success">Active</span> -->
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                        {{else}}
+                        <thead>
+                            <tr class="text-center">
+                                <th>No hay Empleados</th>
+                            </tr>
+                        </thead>
+                        {{/if}}
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editPrice" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div id="newElementId" style="margin-left: 20vh;"></div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left: 100px;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <table id="examples1" class="display" style="width:100%;margin-left: 4vh;">
+
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Ciudad</th>
+                                <th>Precio bus</th>
+                                <th>Precio turismo</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="testBody">
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cerrar" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="sendEditPrice()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editPriceTgu" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <div id="newElementId" style="margin-left: 20vh;"></div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left: 100px;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <table id="examples1" class="display" style="width:100%;margin-left: 4vh;">
+
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Destino</th>
+                                <th>Precio bus</th>
+                                <th>Precio turismo</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tguTable">
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="sendEditPriceTGU()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="EditUseTransporIncova" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <div id="newElementId" style="margin-left: 20vh;"></div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left: 100px;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <table id="examples1" class="display" style="width:100%;margin-left: 4vh;">
+
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Destino</th>
+                                <th>Precio bus</th>
+                                <th>Precio turismo</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="spsTableTransport">
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="EditUseTransporIncovaTgu" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <div id="newElementId" style="margin-left: 20vh;"></div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left: 100px;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <table id="examples1" class="display" style="width:100%;margin-left: 4vh;">
+
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Destino</th>
+                                <th>Precio bus</th>
+                                <th>Precio turismo</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="spsTableTransportTgu">
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="getPayroll" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left: 400px;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="form-group col">
+                            <label for="message-text" class="col-form-label">Fecha
+                                de inicio:</label>
+                            <input type="date" class="form-control" id="dateStart" style="width: 20vh;">
+                        </div>
+                        <div class="form-group col">
+                            <label for="message-text" class="col-form-label">Fecha
+                                de fin:</label>
+                            <input type="date" class="form-control" id="dateEnd" style="width: 20vh;">
+                        </div>
+                        <div class="form-group col-sm">
+                            <label for="message-text" class="col-form-label form-group">Entidad:</label>
+                            <select id="entityId" style="width:150px;" placeholder="Buscar..." required>
+                                <option value="">Seleccione...</option>
+                                {{#if entities}}
+                                {{#each entities}}
+                                <option value="{{entityId}}">{{entityName}}</option>
+                                {{/each}}
+                                {{else}}
+
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>No hay registros</th>
+                                    </tr>
+                                </thead>
+                                {{/if}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeModal" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <a type="text" class="btn btn-info" data-toggle="modal" data-target="#" onclick="getPayroll()">
+                    <span style="">Generar planilla</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

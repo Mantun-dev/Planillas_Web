@@ -1,0 +1,113 @@
+    {{>navigation}}
+
+    <div id="main">
+        <header class="mb-3">
+            <a href="#" class="burger-btn d-block d-xl-none">
+                <em class="bi bi-justify fs-3"></em>
+            </a>
+        </header>
+
+        <div class="page-heading">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-12 col-md-6 order-md-1 order-last">
+                        <h3>Personal</h3>
+                        {{!-- <p class="text-subtitle text-muted">For user to check they list</p> --}}
+                    </div>
+                    <div class="col-12 col-md-6 order-md-2 order-first">
+                        <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="">Dashboard</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">DataTable</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <section class="section">
+                <div class="card">
+                    <div class="row">
+                        <div class="col" style="margin-top: 1vh">
+                            <button type="button" onclick="EditUseTransporIncova()" class="btn btn-success" data-toggle="modal"
+                                data-target="#EditUseTransporIncova">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                                    class="bi bi-person-plus-fill" viewBox="0 0 18 18">
+                                    <path
+                                        d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                    <path fill-rule="evenodd"
+                                        d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                                </svg>
+                                <span>Precios cuando usan transporte de incova</span>
+                            </button>
+                        </div>
+
+
+                    </div>
+
+                    <div class="card-body" style="width: 50%;">
+                        <table id="examples1" class="display" style="width:100%">
+                            {{#if companies}}
+                            <thead>
+                                <tr>
+                                    <th style="width: 10vh;">No.</th>
+                                    <th style="width: 20vh;">Compañia</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each companies}}
+                                <tr>
+                                    <td>{{number}}</td>
+                                    <td>{{companyName}}</td>
+                                    <td>
+                                        <button type="button" id="editBtn" class="btn" data-toggle="modal" data-target="#editPrice"
+                                            style="margin-left: 1vh;" onclick="editPrice('{{companyId}}')">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                                <path
+                                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                            </svg>
+                                        </button>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                            {{else}}
+                            <thead>
+                                <tr class="text-center">
+                                    <th>No hay Empleados</th>
+                                </tr>
+                            </thead>
+                            {{/if}}
+                        </table>
+                    </div>
+                </div>
+                {{>modals}}
+            </section>
+        </div>
+
+        <footer>
+            <div class="footer clearfix mb-0 text-muted">
+                <div class="float-start">
+                    <p>2021 &copy; Incova</p>
+                </div>
+                <div class="float-end">
+                    <p>Crafted with <span class="text-danger"><em class="bi bi-heart"></em></span> by <a
+                            href="">Mantun</a></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script type="text/JavaScript">
+        function createNewElement() {
+            // First create a DIV element.
+            var txtNewInputBox = document.getElementById('newElementId');
+
+            // Then add the content (a new input box) of the element.
+            txtNewInputBox.innerHTML = "<input type='text' id='newInputBox'>";
+            // Finally put it where it is supposed to appear.
+            document.getElementById("newElementId").appendChild(txtNewInputBox);            
+            
+        }  
+    </script>

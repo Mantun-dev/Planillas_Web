@@ -1,0 +1,89 @@
+<div id="app">
+    <div id="sidebar" class="active">
+        <div class="sidebar-wrapper active" height="7.5rem;">
+            <div class="sidebar-header">
+                <div class="d-flex justify-content-between">
+                    <div class="logo">
+                        <a href="main"><img src="assets/images/logo/log.png" alt="Logo" srcset=""></a>
+                    </div>
+                    <div class="toggler">
+                        <a href="#" class="sidebar-hide d-xl-none d-block"><em class="bi bi-x bi-middle"></em></a>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-menu fon">
+                <ul class="menu">
+
+                    <li class="sidebar-title ">
+                        <span class="display-6">Controles generales</span>
+                    </li>
+
+                    {{#each options}}
+                    <li class="sidebar-item {{one}} " id="one">
+                        <a href="dashboard" class='sidebar-link'>
+                            <i class="bi bi-grid-fill " style="line-height: 0.356;"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                   
+                    <li class="sidebar-item  has-sub {{two}} {{ten}}">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-grid-1x2-fill" style="line-height: 0.356;"></i>
+                            <span>Empledos</span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="personal">Activos</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="inactivos">Inactivos</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="sidebar-item  has-sub {{eleven}} {{twelve}}">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-grid-1x2-fill" style="line-height: 0.356;"></i>
+                            <span>Contratistas</span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="contratistasact">Activos</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="contratistasinac">Inactivos</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="sidebar-item  {{three}}" id="three">
+                        <a href="planilla" class='sidebar-link'>
+                            <i class="bi bi-file-earmark-spreadsheet-fill" style="line-height: 0.356;"></i>
+                            <span>Planillas</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item  has-sub {{four}} {{five}} {{six}} {{seven}} {{eight}} {{nine}}">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-cash" style="line-height: 0.356;"></i>
+                            <span>Precios para contratistas</span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="SanPedroSula">San Pedro Sula</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="Tegucigalpa">Tegucigalpa</a>
+                            </li>
+                           
+                        </ul>
+                    </li>
+
+                    {{/each}}
+                </ul>
+            </div>
+            <button class="sidebar-toggler btn x"><em data-feather="x"></em></button>
+        </div>
+    </div>
+</div>

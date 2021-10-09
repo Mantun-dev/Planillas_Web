@@ -16,115 +16,272 @@
     <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+    {{!-- <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> --}}
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/v/bs4/dt-1.10.25/fc-3.3.3/fh-3.1.9/r-2.2.9/sc-2.0.4/datatables.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
 
     <link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css"
+        integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+    <style>
+        .des,
+        .other,
+        .des2,
+        .other2,
+        p,
+        input {
+            font: 14px Verdana;
+        }
+
+        #mytab {
+            width: 100%;
+            overflow-x: scroll;
+            margin-bottom: 10px;
+        }
+
+        .des {
+            height: 6vh;
+        }
+
+        .other {
+            height: 8vh;
+        }
+
+        .des2 {
+            height: 6vh;
+        }
+
+        .other2 {
+            height: 8vh;
+        }
+
+        .desing,
+        .des,
+        .other,
+        .des2,
+        .other2 {
+            border: solid 1px #DDD;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
+        }
+
+        .des,
+        .des2 {
+            font-weight: bold;
+        }
+
+        .wraper {
+            width: 100%;
+            overflow-x: scroll;
+            margin-bottom: 10px;
+        }
+
+        .wraper #mytab .des:first-child,
+        .other:first-child,
+        .des:nth-child(2),
+        .other:nth-child(2),
+        .des:nth-child(3),
+        .other:nth-child(3) {
+            position: sticky;
+            left: 0;
+            background-color: #ddd;
+        }
+
+        .wraper .des,
+        .wraper .other {
+            border-bottom: dashed #888 1px;
+        }
+
+        .disable {
+            pointer-events: none;
+            background-color: #eeeeee;
+        }
+
+        /* Style the tab */
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="app">
-            <div id="sidebar" class="active">
-                <div class="sidebar-wrapper active" height="7.5rem;">
-                    <div class="sidebar-header">
-                        <div class="d-flex justify-content-between">
-                            <div class="logo">
-                                <a href="main"><img src="assets/images/logo/log.png" alt="Logo" srcset=""></a>
-                            </div>
-                            <div class="toggler">
-                                <a href="#" class="sidebar-hide d-xl-none d-block"><em class="bi bi-x bi-middle"></em></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sidebar-menu fon">
-                        <ul class="menu">
-                            <li class="sidebar-title ">
-                                <span class="display-6">Controles generales</span>
-                            </li>
 
-                            <li class="sidebar-item {{one}} " id="one" >
-                                <a href="/"  class='sidebar-link' >
-                                    <i class="bi bi-grid-fill " style="line-height: 0.356;"></i>
-                                    <span >Dashboard</span>
-                                </a>
-                            </li>
-
-
-
-                            <li class="sidebar-item {{two}}" id="two"  >
-                                <a href="personal"  class='sidebar-link' >
-                                    <i class="bi bi-grid-1x2-fill" style="line-height: 0.356;"></i>
-                                    <span>Personal</span>
-                                </a>
-                            </li>
-
-                            <li class="sidebar-item  {{three}}" id="three" >
-                                <a href="planilla"  class='sidebar-link' >
-                                    <i class="bi bi-file-earmark-spreadsheet-fill" style="line-height: 0.356;"></i>
-                                    <span>Planillas</span>
-                                </a>
-                            </li>
-
-                            <li class="sidebar-item  has-sub {{four}} {{five}} {{six}} {{seven}} {{eight}} {{nine}}">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-cash" style="line-height: 0.356;"></i>
-                                <span>Precios para contratista</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="alorsps">Alorica SPS</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="starteksps">Startek SPS</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="zerovariansps">Zero Variance SPS</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="startektgu">Startek TGU</a>
-                                </li>
-                                
-                                <li class="submenu-item ">
-                                    <a href="startektguxviaje">Startek TGU por viaje</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="sidebar-item {{ten}}" id="three" >
-                            <a href="bonos"  class='sidebar-link' >
-                                <i class="bi bi-stack" style="line-height: 0.356;"></i>
-                                <span>Bonos</span>
-                            </a>
-                       </li>
-                       <li class="sidebar-item {{eleven}}" id="three" >
-                            <a href="deducciones"  class='sidebar-link' >
-                                <i class="bi bi-x-octagon-fill" style="line-height: 0.356;"></i>
-                                <span>Deducciones</span>
-                            </a>
-                       </li>
-                        </ul>
-                    </div>
-                    <button class="sidebar-toggler btn x"><em data-feather="x"></em></button>
-                </div>
-            </div>
-    </div>    
     {{{body}}}
+
+
     <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js">
+    </script>
 
     <script src="assets/vendors/apexcharts/apexcharts.js"></script>
     <script src="assets/js/pages/dashboard.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="assets/js/logic.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="assets/vendors/simple-datatables/simple-datatables.js"></script>
-    <script>
-         Simple Datatable
-        let table1 = document.querySelector('#table1');
-        let dataTable = new simpleDatatables.DataTable(table1);
-        
-  
-    </script>
-    
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"
+        integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+    <script type="text/javascript"
+        src="https://cdn.datatables.net/v/bs4/dt-1.10.25/fc-3.3.3/fh-3.1.9/r-2.2.9/sc-2.0.4/datatables.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"> </script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-analytics.js"> </script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-messaging.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('select').selectize({
+                sortField: 'text'
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#examples1').DataTable({
+                language: {
+                    url: '/assets/js/Spanish.json'
+                },
+            });
+        });
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('/firebase-messaging-sw.js').then(function (registration) {
+                    // Registration was successful                    
+                    console.log('ServiceWorker registration successful with scope: ', registration
+                        .scope);
+                }, function (err) {
+                    // registration failed :(
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+    <script>
+        MsgElem = document.getElementById("msg")
+        TokenElem = document.getElementById("token")
+        NotisElem = document.getElementById("notis")
+        ErrElem = document.getElementById("err")
+        var config = {
+            apiKey: "AIzaSyD3W4n5HrJRqPEktSWVVvFD3XxhHpcKpt8",
+            authDomain: "notifications-web-9f01f.firebaseapp.com",
+            projectId: "notifications-web-9f01f",
+            storageBucket: "notifications-web-9f01f.appspot.com",
+            messagingSenderId: "895758251348",
+            appId: "1:895758251348:web:8a29f47fbe4abbab20c4c1",
+            measurementId: "G-XTFCN5KT0Y"
+        };
+
+        firebase.initializeApp(config);
+
+        const messaging = firebase.messaging();
+        messaging
+            .requestPermission()
+            .then(function () {
+                MsgElem.innerHTML = "Notification permission granted."
+                console.log("Notification permission granted.");
+
+                // get the token in the form of promise
+                return messaging.getToken()
+            })
+            .then(function (token) {
+                console.log(token);
+                TokenElem.innerHTML = "token is : " + token
+            })
+            .catch(function (err) {
+                ErrElem.innerHTML = ErrElem.innerHTML + "; " + err
+                console.log("Unable to get permission to notify.", err);
+            });
+
+        messaging.onMessage(function (payload) {
+            console.log("Message received. ", payload);
+            NotisElem.innerHTML = NotisElem.innerHTML + JSON.stringify(payload)
+        });
+    </script>
+
+    <script>
+        $("#btnExcel").click(function () {
+            Xlexport("examples1")
+        });
+
+        function Xlexport(tableId) {
+            var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
+            var textRange;
+            var j = 0;
+            tab = document.getElementById(tableId);
+            for (j = 0; j < tab.rows.length; j++) {
+                tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
+            }
+            tab_text = tab_text + "</table>";
+            tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, ""); //remove if u want links in your table
+            tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+            tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // remove input params
+            sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+            return (sa);
+        }
+    </script>
+    <script>
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
 
 </body>
 

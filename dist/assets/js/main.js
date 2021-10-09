@@ -75,8 +75,5 @@ if (typeof PerfectScrollbar == 'function') {
 
 
 
-
-
-
 // Scroll into active sidebar
 document.querySelector('.sidebar-item.active').scrollIntoView(false)
